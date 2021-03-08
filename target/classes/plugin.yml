@@ -1,0 +1,9 @@
+name: VoidInstantKill
+version: 1.1
+main: VoidInstantKill.me
+api-version: 1.16
+commands:
+  VIK-reload:
+    description: Reloads The Plugin
+    permission: vik.reload
+    permission-message: You Dont Have Permission To Use That Command! Node - vik.reload
