@@ -1,0 +1,31 @@
+#--[################################################################]
+#--[##################### GENERAL INFORMATION ######################]
+#--[################################################################]
+
+# Don't delete anything below, just edit the fields!
+# General Reminder: true means yes; false means no
+# If you ever feel like you have messed up and need to get the file back to its default state just delete the .yml file and restart the server
+
+# If you have any questions you can always get support at: https://discord.gg/9jyHhUepaG
+
+
+# Do you want to get update notifications when new versions of VoidInstantKill are released?
+Update Notifications: true
+
+
+#################################################################
+##################### General Configuration #####################
+#################################################################
+
+# Choose a custom Y Level for the VoidInstantKill (Leave as 0 for default)
+Custom Respawn Y Level: 0
+
+# Choose whether the player should instantly respawn
+Instant Respawn: false
+
+# If the player instantly respawns this message will be sent in chat (Remove text for no message!)
+# Now supports color codes!
+Instant Respawn Message: "&c[VoidInstantKill] &fYou died from falling in the void!"
+
+# When a player dies from instant respawn, should it clear their inventory? [Also clears players Exp]
+Instant Respawn Clear Inventory: true

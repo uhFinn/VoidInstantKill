@@ -1,2 +1,5 @@
-VoidInstantKill\me.class
-Listener\VoidDrop.class
+uhfinn\voidinstantkill\Listeners\VoidDrop.class
+uhfinn\voidinstantkill\Modules\CustomYMLFiles.class
+uhfinn\voidinstantkill\Listeners\UpdateChecker.class
+uhfinn\voidinstantkill\Main.class
+uhfinn\voidinstantkill\Listeners\UpdateChecker$1.class
