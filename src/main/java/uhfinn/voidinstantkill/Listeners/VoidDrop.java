@@ -1,7 +1,9 @@
 package uhfinn.voidinstantkill.Listeners;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.event.EventException;
 import org.bukkit.plugin.Plugin;
 import uhfinn.voidinstantkill.Main;
 import org.bukkit.Location;
@@ -27,17 +29,28 @@ public class VoidDrop implements Listener {
                 p.damage(2000);
             }
             if(config.getBoolean("Instant Respawn")){
-                Location respawn = Objects.requireNonNull(plugin.getServer().getWorld(p.getWorld().getName())).getSpawnLocation();
+                Location respawn =plugin.getServer().getWorld(p.getWorld().getName()).getSpawnLocation();
+                Location checkLoc = respawn;
+                checkLoc.setY(checkLoc.getY() + 1);
+                if(checkLoc.getBlock().getType() != Material.AIR && checkLoc.getBlock().getType() != Material.WATER){
+                    respawn = respawn.getWorld().getHighestBlockAt(respawn).getLocation();
+                    respawn.setY(respawn.getY() + 1);
+                }
                 p.teleport(respawn);
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getString("Instant Respawn Message")));
 
-                double health = Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue();
+                double health = 0;
+                try {
+                    health = p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+                } catch(NoClassDefFoundError e) {
+                    health = 20;
+                }
                 p.setHealth(health);
                 p.setFoodLevel(20);
                 if(config.getBoolean("Instant Respawn Clear Inventory")){
                     p.getInventory().clear();
                     p.setTotalExperience(0);
                 }
-                if(config.getString("Instant Respawn Message") != null && !config.getString("Instant Respawn Message").equals("") && !config.getString("Instant Respawn Message").equals(" ")) p.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getString("Instant Respawn Message")));
             }
         }
     }

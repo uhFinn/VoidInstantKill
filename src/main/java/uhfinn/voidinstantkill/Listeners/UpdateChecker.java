@@ -23,6 +23,7 @@ public class UpdateChecker implements Listener
 
     FileConfiguration config = CustomYMLFiles.getCustomConfigFile("Config.yml");
     private String spigotVersion = "0.0";
+    private String PluginVersion = Main.getPlugin(Main.class).getDescription().getVersion();
 
     @EventHandler
     public void PlayerJoin(PlayerJoinEvent event) {
@@ -39,12 +40,18 @@ public class UpdateChecker implements Listener
                     error.printStackTrace();
                 }
 
-                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(Main.class), new Runnable() {
-                    public void run() {
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c[VoidInstantKill] &fVersion " + spigotVersion + " has been released!\nGet it now at: &nhttps://www.spigotmc.org/resources/" + ID));
-                        p.playSound(p.getLocation(), Sound.BLOCK_BELL_USE, 5, 1);
-                    }
-                }, 400L);
+                if(spigotVersion != PluginVersion) {
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(Main.class), new Runnable() {
+                        public void run() {
+                            try {
+                                p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 5, 1);
+                            } catch (NoSuchFieldError e) {
+                                //Old versions
+                            }
+                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c[VoidInstantKill] &fVersion " + spigotVersion + " has been released!\nGet it now at: &nhttps://www.spigotmc.org/resources/" + ID));
+                        }
+                    }, 400L);
+                }
             }
         }
     }
